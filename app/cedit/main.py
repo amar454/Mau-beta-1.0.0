@@ -2,7 +2,7 @@
 from os import system
 
 def cedit(text_file):
-    uneditableTxt = {'doc/help.txt', 'doc/INFO.txt', 'msys/nml/computername', 'msys/nml/consolecolors', 'msys/nml/username'}
+    uneditableTxt = {'doc/help.txt', 'doc/INFO.txt', 'msys/nml/computername', 'msys/nml/consolecolors', 'msys/nml/username', ''}
     system('clear')
     print('Welcome to Cedit 1.0, usage can be found by exiting and typing \'cedit --help\'. To exit press ctrl+x, '
           'to save press ctrl+s')

@@ -11,7 +11,7 @@ from msys.lib.echo import *
 from msys.lib.quit import quitf
 from msys.lib.refresh import refresh
 from app.cedit.main import *
-
+from msys.lib.pathdif import *
 import msys
 """
 MAU is a linux imitation made in python
@@ -58,7 +58,8 @@ class Finder:
             elif tk == 'ls':
                 return ls(self.commandList, docDir=r'doc')
             elif tk == 'cd':
-                return cd(commandList=self.commandList, currpathname=currPath)
+                return cd(commandList=self.commandList, currpathname=currPath, rootDir=os.path.dirname
+                (os.path.abspath(__file__)))
             elif tk == 'cedit':
                 pass
         else:
@@ -66,8 +67,6 @@ class Finder:
 
 
 if __name__ == '__main__':
-
-
     system('clear')
     with open(r'msys/nml/username') as f:
         userName = f.read()
@@ -83,6 +82,7 @@ if __name__ == '__main__':
     while True:
         currPath = os.getcwd()
         userInput = input(
-            colored(f'{userName}@{computerName}', c_colorsList[0].lstrip('console_color1 = '), attrs=['bold']) + ':' + colored
-            (f'~' if currPath==os.path.dirname(os.path.abspath(__file__)) else currPath, c_colorsList[1].lstrip('console_color2 = ')) + '% ')
+            colored(f'{userName}@{computerName}', c_colorsList[0].lstrip('console_color1 = '),
+                    attrs=['bold']) + ':' + colored(pathnaming(rootDir=os.path.dirname
+                (os.path.abspath(__file__)), currentdir=currPath),c_colorsList[1].lstrip('console_color2 = ')) + '% ')
         Finder(userInput).mFinder()
