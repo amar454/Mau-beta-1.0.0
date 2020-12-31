@@ -83,6 +83,6 @@ if __name__ == '__main__':
         currPath = os.getcwd()
         userInput = input(
             colored(f'{userName}@{computerName}', c_colorsList[0],
-                    attrs=['bold']) + ':' + colored(pathnaming(rootDir=os.path.dirname
-            (os.path.abspath(__file__)), currentdir=currPath), c_colorsList[1]) + '% ')
+                    attrs=['bold']) + ':' + colored(replaceHome(text=currPath, rootDir=os.path.dirname
+            (os.path.abspath(__file__))), c_colorsList[1]) + '% ')
         Finder(userInput).mFinder()

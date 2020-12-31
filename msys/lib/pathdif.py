@@ -1,2 +1,2 @@
-def pathnaming(rootDir, currentdir):
-    return currentdir.replace(rootDir, '~')
+def replaceHome(text, rootDir):
+    return text.replace(rootDir, '~')
