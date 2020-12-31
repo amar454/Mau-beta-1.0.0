@@ -16,16 +16,14 @@ def cd(commandList, currpathname, rootDir):
     CHANGED_DIR = False
     LS_COMMAND = False
     path = None
-
     try:
-        os.chdir(commandList[0])
+        os.chdir(commandList[0].replace('~', rootDir))
     except OSError:
-        return print(f'cd: {commandList[0]}: not a valid path')
+        return print(f'cd: {commandList[0]}: not a valid path2')
     except IndexError:
         return None
-    if len(commandList) > 2:
+    if len(commandList) > 1:
         for token in commandList:
-
             if token == '-ls' and not LS_COMMAND:
                 LS_COMMAND = True
                 continue
