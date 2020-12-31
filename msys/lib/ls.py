@@ -184,7 +184,7 @@ def ls(commandList, docDir, rootDir):
                     wrongList.append(h)
                     continue
         if HELP_REQUEST:
-            with open(docDir + '/lsdoc') as f:
+            with open(f'{rootDir}/doc/lsdoc') as f:
                 return print(f.read())
 
         # Time last modified: | User of files: | Size of files: | Type: | Hidden: | File names:
@@ -192,3 +192,4 @@ def ls(commandList, docDir, rootDir):
         if not done:
             confop(timeFiles=TIME_FILES, hiddenFiles=HIDDEN_FILES, userFiles=USER_FILES, sizeFiles=SIZE_FILES,
                    typeFiles=TYPE_FILES, hiddenFilesA=hidden, allCommand=ALL_COMMAND, customDir=None, rootDir=rootDir)
+            return None
