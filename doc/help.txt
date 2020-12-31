@@ -1,0 +1,15 @@
+Commands:
+    echo: ARGS: OPTIONS,    returns ARGS as plain text
+
+
+    quit,                   quits command line
+
+
+    ls: SET: OPTIONS,       lists the current directories files, and subdirectories. If param OPT is filled it will list OPT's files and subdirectories, will return FileNotFoundError if OPT isn't a real directory under the root directory
+
+
+    math: ARGS: OPTIONS     solves ARGS if ARGS is a math equation, throws MathError if it isn't a math equation
+
+    nset: OPTION: NAME,
+Tip:
+    Type (command) --help for more help with each command
