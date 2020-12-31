@@ -9,7 +9,7 @@ def cc1(color, rootDir):
         validColors = {'blue', 'green', 'pink', 'red', 'purple', 'white', 'yellow', ''}
         lines = f.readlines()
         if color in validColors:
-            lines[0] = f'console_color1 = {color}\n'
+            lines[0] = f'console_color1 = {color}'
             f.write(lines)
             f.close()
             return None
@@ -20,6 +20,7 @@ def cc2(color, rootDir):
     with open(f'{rootDir}/msys/nml/consolecolors', 'w+') as f:
         validColors = {'blue', 'green', 'pink', 'red', 'purple', 'white', 'yellow', ''}
         lines = f.readlines()
+        print(lines)
         if color in validColors:
             lines[1] = f'console_color2 = {color}\n'
             return None

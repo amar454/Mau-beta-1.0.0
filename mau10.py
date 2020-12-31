@@ -1,18 +1,16 @@
 #!/usr/bin/python3.8
-import sys
-import time
-from os import system
 from termcolor import colored
+
+from app.cedit.main import *
 from msys.lib.cd import *
 from msys.lib.cset import cset
+from msys.lib.echo import *
 from msys.lib.ls import *
 from msys.lib.nset import *
-from msys.lib.echo import *
+from msys.lib.pathdif import *
 from msys.lib.quit import quitf
 from msys.lib.refresh import refresh
-from app.cedit.main import *
-from msys.lib.pathdif import *
-import msys
+
 """
 MAU is a linux imitation made in python
 Amar Djulovic & others
@@ -56,7 +54,8 @@ class Finder:
                     f.close()
                 return None
             elif tk == 'ls':
-                return ls(self.commandList, docDir=r'doc')
+                return ls(self.commandList, docDir=r'doc', rootDir=os.path.dirname
+                (os.path.abspath(__file__)))
             elif tk == 'cd':
                 return cd(commandList=self.commandList, currpathname=currPath, rootDir=os.path.dirname
                 (os.path.abspath(__file__)))
@@ -74,15 +73,13 @@ if __name__ == '__main__':
     with open(r'msys/nml/computername') as f:
         computerName = f.read()
         f.close()
-    with open(r'msys/nml/consolecolors') as f:
-        c_colorsList = []
-        for i in f.readlines():
-            c_colorsList.append(i.rstrip('\n'))
+    with open(r'msys/nml/consolecolor.txt') as f:
+        c_colorsList = f.read().split('\n')
 
     while True:
         currPath = os.getcwd()
         userInput = input(
-            colored(f'{userName}@{computerName}', c_colorsList[0].lstrip('console_color1 = '),
+            colored(f'{userName}@{computerName}', c_colorsList[0],
                     attrs=['bold']) + ':' + colored(pathnaming(rootDir=os.path.dirname
-                (os.path.abspath(__file__)), currentdir=currPath),c_colorsList[1].lstrip('console_color2 = ')) + '% ')
+            (os.path.abspath(__file__)), currentdir=currPath), c_colorsList[1]) + '% ')
         Finder(userInput).mFinder()

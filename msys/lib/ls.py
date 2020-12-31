@@ -9,6 +9,10 @@ from datetime import datetime
 from pwd import getpwuid
 
 
+def replaceHome(text, rootDir):
+    text.replace('~', rootDir)
+
+
 def printE(strs):
     return print(strs, end='')
 
@@ -39,7 +43,6 @@ def s(fs):
         g = os.path.getsize(fs)
     except OSError:
         return None
-
     if g == 0:
         return "0B"
     size_name = ("b", "kb", "mb", "gb")
@@ -49,35 +52,40 @@ def s(fs):
     return "%s %s" % (aas, size_name[di])
 
 
-def confop(timeFiles, userFiles, sizeFiles, typeFiles, hiddenFiles, hiddenFilesA):
+def confop(timeFiles, userFiles, sizeFiles, typeFiles, hiddenFiles, hiddenFilesA, allCommand, customDir, rootDir):
+    emp = ''
+    rf = '/'
+
     printE('Time last modified: | ' if timeFiles else '')
     printE('User of files: | ' if userFiles else '')
     printE('Size of files: | ' if sizeFiles else '')
     printE('Type: | ' if typeFiles else '')
     printE('Hidden: | ' if hiddenFiles else '')
     print('File names: ')
-    for x in os.listdir():
+    for x in os.listdir(customDir.replace('~', rootDir) if customDir is not None else None):
+        mainSub = customDir.replace('~', rootDir) + "/" if customDir is not None else ''
         if hiddenFiles:
-            printE(f'{t(x).ljust(20, " ")}| ' if timeFiles else '')
-            printE(f"{u(x).ljust(15, ' ')}| " if userFiles else '')
-            printE(f"{s(x).ljust(15, ' ')}| " if sizeFiles else '')
-            printE(f'{c(x).ljust(5, " ")} | ' if typeFiles else '')
-            printE((f'Yes'.ljust(8, " ") + '| ' if x in hiddenFilesA else 'No'.ljust(8, " ") + '| '))
+            printE(t(f'{mainSub}{x}').ljust(20, " ") + '| ' if timeFiles else '')
+            printE(u(f'{mainSub}{x}').ljust(15, ' ') + '| ' if userFiles else '')
+            printE(s(f'{mainSub}{x}').ljust(15, ' ') + '| ' if sizeFiles else '')
+            printE(c(f"{mainSub}{x}").ljust(6, " ") + '| ' if typeFiles else '')
+            printE((f'Yes'.ljust(8, " ") + '| ' if x in hiddenFilesA else 'No'.ljust(8,
+                                                                                     " ") + '| ') if hiddenFiles else '')
             printE(x)
             print('')
         if not hiddenFiles:
             if x in hiddenFilesA:
                 continue
             else:
-                printE(f'{t(x).ljust(20, " ")}| ' if timeFiles else '')
-                printE(f"{u(x).ljust(15, ' ')}| " if userFiles else '')
-                printE(f"{s(x).ljust(15, ' ')}| " if sizeFiles else '')
-                printE(f'{c(x).ljust(5, " ")} | ' if typeFiles else '')
+                printE(t(f'{mainSub}{x}').ljust(20, " ") + '| ' if timeFiles else '')
+                printE(u(f'{mainSub}{x}').ljust(15, ' ') + '| ' if userFiles else '')
+                printE(s(f'{mainSub}{x}').ljust(15, ' ') + '| ' if sizeFiles else '')
+                printE(c(f"{mainSub}{x}").ljust(6, " ") + '| ' if typeFiles else '')
                 printE(x)
                 print('')
 
 
-def ls(commandList, docDir):
+def ls(commandList, docDir, rootDir):
     """
     This is the ls function in Mau. This lists the current directories and subdirectories
     Options are as follows
@@ -106,7 +114,7 @@ def ls(commandList, docDir):
     HELP_REQUEST = False
     ALL_COMMAND = False
     CUST_DIR = False
-    hidden = {'.idea', 'help.txt', 'INFO.txt', 'venv', '__pycache__', '__init__'}
+    hidden = {'.idea', 'help.txt', 'INFO.txt', 'venv', '__pycache__', '__init__', '.git'}
     if len(commandList) == 1:
         # default ls configuration
         print('File names: ')
@@ -115,39 +123,35 @@ def ls(commandList, docDir):
                 print(i)
                 continue
     else:
-        invalidOptions = []
+        wrongList = []
         commandListFinal = []
-        validLSOptions = {'-u', '-t', '-h', '-s', '-c', '-a'}
         errorOption = None
         done = False
         # checks for options
         for option in commandList:
-            if option in validLSOptions:
-
-                if option == '-u':
-                    USER_FILES = True
-                    commandListFinal.append(option)
-
-                elif option == '-t':
-                    TIME_FILES = True
-                    commandListFinal.append(option)
-                elif option == '-h':
-                    HIDDEN_FILES = True
-                    commandListFinal.append(option)
-                elif option == '-s':
-                    SIZE_FILES = True
-                    commandListFinal.append(option)
-                elif option == '-c':
-                    TYPE_FILES = True
-                    commandListFinal.append(option)
-                elif option == '-a':
-                    HIDDEN_FILES = True
-                    TIME_FILES = True
-                    USER_FILES = True
-                    SIZE_FILES = True
-                    TYPE_FILES = True
-                    ALL_COMMAND = True
-                    commandListFinal.append(option)
+            if option == '-u':
+                USER_FILES = True
+                commandListFinal.append(option)
+            elif option == '-t':
+                TIME_FILES = True
+                commandListFinal.append(option)
+            elif option == '-h':
+                HIDDEN_FILES = True
+                commandListFinal.append(option)
+            elif option == '-s':
+                SIZE_FILES = True
+                commandListFinal.append(option)
+            elif option == '-c':
+                TYPE_FILES = True
+                commandListFinal.append(option)
+            elif option == '-a':
+                HIDDEN_FILES = True
+                TIME_FILES = True
+                USER_FILES = True
+                SIZE_FILES = True
+                TYPE_FILES = True
+                ALL_COMMAND = True
+                commandListFinal.append(option)
             elif option == '--help':
                 HELP_REQUEST = True
                 commandListFinal.append(option)
@@ -155,16 +159,29 @@ def ls(commandList, docDir):
             elif option == 'ls':
                 commandListFinal.append(option)
                 continue
-
             else:
                 errorOption = option
+                commandListFinal.append(option)
                 break
-        if errorOption is not None and errorOption[0] == '-':
-            pass
-
         if errorOption is not None and errorOption[0] != '-':
-            print(commandList.index(errorOption))
-            done = True
+            try:
+                os.listdir(errorOption.replace('~', rootDir))
+
+                return confop(timeFiles=TIME_FILES, hiddenFiles=HIDDEN_FILES, userFiles=USER_FILES,
+                              sizeFiles=SIZE_FILES,
+                              typeFiles=TYPE_FILES, hiddenFilesA=hidden, allCommand=ALL_COMMAND,
+                              customDir=errorOption, rootDir=rootDir)
+            except OSError:
+                return print(': '.join(commandListFinal) + ': not a directory or option for ls, type ls --help for usage')
+
+        if errorOption is not None and errorOption[0] == '-':
+            for h in commandList:
+                if h == errorOption:
+                    wrongList.append(h)
+                    return print(f"{': '.join(wrongList)}: unexpected option, type ls --help for usage")
+                else:
+                    wrongList.append(h)
+                    continue
         if HELP_REQUEST:
             with open(docDir + '/lsdoc') as f:
                 return print(f.read())
@@ -173,4 +190,4 @@ def ls(commandList, docDir):
 
         if not done:
             confop(timeFiles=TIME_FILES, hiddenFiles=HIDDEN_FILES, userFiles=USER_FILES, sizeFiles=SIZE_FILES,
-                   typeFiles=TYPE_FILES, hiddenFilesA=hidden)
+                   typeFiles=TYPE_FILES, hiddenFilesA=hidden, allCommand=ALL_COMMAND, customDir=None, rootDir=rootDir)
