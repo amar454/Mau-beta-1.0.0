@@ -16,6 +16,7 @@ def cd(commandList, currpathname, rootDir):
     CHANGED_DIR = False
     LS_COMMAND = False
     path = None
+
     try:
         os.chdir(commandList[0])
     except OSError:
