@@ -172,7 +172,8 @@ def ls(commandList, docDir, rootDir):
                               typeFiles=TYPE_FILES, hiddenFilesA=hidden, allCommand=ALL_COMMAND,
                               customDir=errorOption, rootDir=rootDir)
             except OSError:
-                return print(': '.join(commandListFinal) + ': not a directory or option for ls, type ls --help for usage')
+                return print(': '.join(commandListFinal) + ': not a directory or option for ls, '
+                                                           'type ls --help for usage')
 
         if errorOption is not None and errorOption[0] == '-':
             for h in commandList:

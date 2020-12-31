@@ -1,4 +1,6 @@
 #!/usr/bin/python3.8
+import sys
+
 from termcolor import colored
 
 from app.cedit.main import *
@@ -45,7 +47,8 @@ class Finder:
             elif tk == 'quit':
                 return quitf()
             elif tk == 'refresh':
-                return refresh()
+                system('clear')
+                os.execv(__file__, sys.argv)
             elif tk == 'nset':
                 return nsmain(self.commandList)
             elif tk == 'help':

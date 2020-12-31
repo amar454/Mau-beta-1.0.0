@@ -5,24 +5,30 @@ Amar Djulovic and others
 """
 
 def cc1(color, rootDir):
-    with open(f'{rootDir}/msys/nml/consolecolors', 'w+') as f:
+    with open(f'{rootDir}/msys/nml/consolecolor.txt', 'r+') as f:
         validColors = {'blue', 'green', 'pink', 'red', 'purple', 'white', 'yellow', ''}
         lines = f.readlines()
         if color in validColors:
-            lines[0] = f'console_color1 = {color}'
-            f.write(lines)
+            lines[0] = f'{color}'
+            f.seek(0)
+            f.write('\n'.join(lines))
+            f.truncate()
             f.close()
             return None
         else:
             f.close()
             return print(f'cset: cc1: {color}: not a valid color')
 def cc2(color, rootDir):
-    with open(f'{rootDir}/msys/nml/consolecolors', 'w+') as f:
+    with open(f'{rootDir}/msys/nml/consolecolor.txt', 'r+') as f:
         validColors = {'blue', 'green', 'pink', 'red', 'purple', 'white', 'yellow', ''}
         lines = f.readlines()
-        print(lines)
+
         if color in validColors:
-            lines[1] = f'console_color2 = {color}\n'
+            lines[1] = f'{color}'
+            f.seek(0)
+            f.write('\n'.join(lines))
+            f.truncate()
+            f.close()
             return None
         else:
             return print(f'cset: cc2: {color}: not a valid color')
