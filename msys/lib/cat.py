@@ -11,7 +11,7 @@ def cat(commandList, rootDir, posixbool):
             with open(f'{rootDir}/doc/catdoc' if posixbool else f'{rootDir}\\doc\\catdoc')as f:
                 return print(f.read())
         try:
-            with open(commandList[1].replace('`', rootDir)) as f:
+            with open(commandList[1].replace('&', rootDir)) as f:
                 print(f.read())
                 f.close()
                 return None
@@ -32,7 +32,7 @@ def cat(commandList, rootDir, posixbool):
             errorOption = option
             break
     try:
-        with open(errorOption.replace('`', rootDir)) as f:
+        with open(errorOption.replace('*', rootDir)) as f:
             print(f.read())
             for _ in f.readlines(): linesCount += 1
             if LINES_COMMANDS:

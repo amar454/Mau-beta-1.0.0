@@ -1,2 +1,2 @@
 def replaceHome(text, rootDir):
-    return text.replace(rootDir, '`')
+    return text.replace(rootDir, '*')

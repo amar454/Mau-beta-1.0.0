@@ -62,8 +62,8 @@ def confop(timeFiles, userFiles, sizeFiles, typeFiles, hiddenFiles, hiddenFilesA
     printE('Type: | ' if typeFiles else '')
     printE('Hidden: | ' if hiddenFiles else '')
     print('File names: ')
-    for x in os.listdir(customDir.replace('`', rootDir) if customDir is not None else None):
-        mainSub = customDir.replace('`', rootDir) + ("/" if posixfinder else '\\') if customDir is not None else ''
+    for x in os.listdir(customDir.replace('*', rootDir) if customDir is not None else None):
+        mainSub = customDir.replace('*', rootDir) + ("/" if posixfinder else '\\') if customDir is not None else ''
         if hiddenFiles:
             printE(t(f'{mainSub}{x}').ljust(20, " ") + '| ' if timeFiles else '')
             printE(u(f'{mainSub}{x}').ljust(15, ' ') + '| ' if userFiles else '')
@@ -165,7 +165,7 @@ def ls(commandList, docDir, rootDir, posixfinder):
                 break
         if errorOption is not None and errorOption[0] != '-':
             try:
-                os.listdir(errorOption.replace('`', rootDir))
+                os.listdir(errorOption.replace('&', rootDir))
 
                 return confop(timeFiles=TIME_FILES, hiddenFiles=HIDDEN_FILES, userFiles=USER_FILES,
                               sizeFiles=SIZE_FILES,
