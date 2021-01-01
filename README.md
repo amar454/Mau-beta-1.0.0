@@ -1,5 +1,6 @@
 Mau-beta-1.0.11
 Commands:
+    
     echo: ARGS,             returns ARGS as plain text
 
     quit,                   quits command line
@@ -19,5 +20,6 @@ Commands:
     mkdir: DIR              will create a directory with DIR's name if the directory does not already exist in the pwd
 
     mkfile: FILE            will create a file with FILE's name if a name with FILE's name does not already exist in the pwd
+
 Tip:
     Type (command) --help for more help with each command
