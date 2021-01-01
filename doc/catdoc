@@ -1,0 +1,4 @@
+Description:
+    cat allows you to list the contents of any files on the screen:
+Usage:
+    cat: [OPTIONS]: DIR

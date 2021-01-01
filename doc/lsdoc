@@ -1,8 +1,7 @@
 Description:
-
         This is the ls function in Mau. This lists the current directories and subdirectories
-
-
+Usage:
+    ls: [options]: &DIR
 Options:
 
 -u,             returns the user who made the file
