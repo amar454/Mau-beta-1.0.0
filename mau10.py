@@ -3,7 +3,7 @@ import sys
 
 from termcolor import colored
 
-from app.cedit.main import *
+from app.ceditbeta.main import *
 from msys.lib.cd import *
 from msys.lib.cset import cset
 from msys.lib.echo import *
@@ -29,7 +29,7 @@ class Finder:
     def __init__(self, command):
         self.command = command
         self.commandList = command.split()
-        self.keywords = {'echo', 'ls', 'quit', 'exit', 'math', 'help', 'cd', 'nset', 'refresh', 'cset', 'open', 'cedit',
+        self.keywords = {'echo', 'ls', 'quit', 'exit', 'math', 'help', 'cd', 'nset', 'refresh', 'cset', 'open', 'ceditbeta',
                          'cat'}
 
     def mFinder(self):
@@ -69,7 +69,7 @@ class Finder:
                 (os.path.abspath(__file__)))
 
 
-            elif tk == 'cedit':
+            elif tk == 'ceditbeta':
                 pass
 
 
