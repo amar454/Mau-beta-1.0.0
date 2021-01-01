@@ -13,7 +13,8 @@ from msys.lib.pathdif import *
 from msys.lib.quit import quitf
 from msys.lib.refresh import refresh
 from msys.lib.cat import cat
-
+from msys.lib.mkdir import *
+from msys.lib.mkfile import *
 """
 MAU is a linux imitation made in python
 Amar Djulovic & others
@@ -29,8 +30,8 @@ class Finder:
     def __init__(self, command):
         self.command = command
         self.commandList = command.split()
-        self.keywords = {'echo', 'ls', 'quit', 'exit', 'math', 'help', 'cd', 'nset', 'refresh', 'cset', 'open', 'ceditbeta',
-                         'cat'}
+        self.keywords = {'echo', 'ls', 'quit', 'exit', 'math', 'help', 'cd', 'nset', 'refresh', 'cset', 'open', 'cedit',
+                         'cat', 'mkdir', 'mkfile'}
 
     def mFinder(self):
         # checks for valid keywords, a sort of tokenization system.
@@ -68,9 +69,11 @@ class Finder:
             elif tk == 'cat':
                 cat(self.commandList, os.path.dirname
                 (os.path.abspath(__file__)))
-
-
-            elif tk == 'ceditbeta':
+            elif tk == 'mkfile':
+                mkfile(commandList=self.commandList, rootDir=rootDir)
+            elif tk == 'mkdir':
+                mkdirMain(commandList=self.commandList, rootDir=rootDir)
+            elif tk == 'cedit':
                 pass
 
 
