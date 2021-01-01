@@ -52,7 +52,7 @@ def s(fs):
     return "%s %s" % (aas, size_name[di])
 
 
-def confop(timeFiles, userFiles, sizeFiles, typeFiles, hiddenFiles, hiddenFilesA, allCommand, customDir, rootDir):
+def confop(timeFiles, userFiles, sizeFiles, typeFiles, hiddenFiles, hiddenFilesA, allCommand, customDir, rootDir, posixfinder):
     emp = ''
     rf = '/'
 
@@ -63,7 +63,7 @@ def confop(timeFiles, userFiles, sizeFiles, typeFiles, hiddenFiles, hiddenFilesA
     printE('Hidden: | ' if hiddenFiles else '')
     print('File names: ')
     for x in os.listdir(customDir.replace('~', rootDir) if customDir is not None else None):
-        mainSub = customDir.replace('~', rootDir) + "/" if customDir is not None else ''
+        mainSub = customDir.replace('~', rootDir) + ("/" if posixfinder else '\\') if customDir is not None else ''
         if hiddenFiles:
             printE(t(f'{mainSub}{x}').ljust(20, " ") + '| ' if timeFiles else '')
             printE(u(f'{mainSub}{x}').ljust(15, ' ') + '| ' if userFiles else '')
@@ -85,7 +85,7 @@ def confop(timeFiles, userFiles, sizeFiles, typeFiles, hiddenFiles, hiddenFilesA
                 print('')
 
 
-def ls(commandList, docDir, rootDir):
+def ls(commandList, docDir, rootDir, posixfinder):
     """
     This is the ls function in Mau. This lists the current directories and subdirectories
     Options are as follows
@@ -170,7 +170,7 @@ def ls(commandList, docDir, rootDir):
                 return confop(timeFiles=TIME_FILES, hiddenFiles=HIDDEN_FILES, userFiles=USER_FILES,
                               sizeFiles=SIZE_FILES,
                               typeFiles=TYPE_FILES, hiddenFilesA=hidden, allCommand=ALL_COMMAND,
-                              customDir=errorOption, rootDir=rootDir)
+                              customDir=errorOption, rootDir=rootDir, posixfinder=posixfinder)
             except OSError:
                 return print(': '.join(commandListFinal) + ': not a directory or option for ls, '
                                                            'type ls --help for usage')
@@ -184,12 +184,13 @@ def ls(commandList, docDir, rootDir):
                     wrongList.append(h)
                     continue
         if HELP_REQUEST:
-            with open(f'{rootDir}/doc/lsdoc') as f:
+            with open(f'{rootDir}/doc/lsdoc' if posixfinder else f'{rootDir}\\doc\\lsdoc') as f:
                 return print(f.read())
 
         # Time last modified: | User of files: | Size of files: | Type: | Hidden: | File names:
 
         if not done:
             confop(timeFiles=TIME_FILES, hiddenFiles=HIDDEN_FILES, userFiles=USER_FILES, sizeFiles=SIZE_FILES,
-                   typeFiles=TYPE_FILES, hiddenFilesA=hidden, allCommand=ALL_COMMAND, customDir=None, rootDir=rootDir)
+                   typeFiles=TYPE_FILES, hiddenFilesA=hidden, allCommand=ALL_COMMAND,
+                   customDir=None, rootDir=rootDir, posixfinder=posixfinder)
             return None

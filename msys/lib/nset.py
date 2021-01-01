@@ -6,26 +6,30 @@ Amar Djulovic and others
 import os
 
 
-def usrname(userNameFinal, rootDir):
+def usrname(userNameFinal, rootDir, posixfinder):
     # nset usrname
-    with open(f'{rootDir}/msys/nml/username', 'w+') as f:
+    with open(f'{rootDir}/msys/nml/username' if posixfinder else f'{rootDir}\\msys\\nml\\username', 'w+') as f:
         f.truncate(0)
         f.write(userNameFinal)
         return None
-def cmpname(compnamefinal, rootDir):
-    with open(f'{rootDir}/msys/nml/computername', 'w+') as f:
+
+
+def cmpname(compnamefinal, rootDir, posixfinder):
+    with open(f'{rootDir}/msys/nml/computername' if posixfinder else f'{rootDir}\\msys\\nml\\computername', 'w+') as f:
         f.truncate(0)
         f.write(compnamefinal)
         return None
-def nsmain(commandList):
+
+
+def nsmain(commandList, posixfinder):
     if len(commandList) == 1:
         return None
     elif commandList[1] == 'usrname':
         if len(commandList) == 3:
-            usrname(commandList[2], os.path.dirname(os.path.abspath(__file__)))
+            usrname(commandList[2], os.path.dirname(os.path.abspath(__file__)), posixfinder)
     elif commandList[1] == 'cmpname':
         if len(commandList) == 3:
-            cmpname(commandList[2], os.path.dirname(os.path.abspath(__file__)))
+            cmpname(commandList[2], os.path.dirname(os.path.abspath(__file__)), posixfinder)
         elif len(commandList) == 2:
             if commandList[1] == '--help':
                 return None
