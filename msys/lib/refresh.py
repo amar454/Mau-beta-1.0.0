@@ -1,5 +1,6 @@
 """
 refresh function in mau
+(NON FUNCTIONAL)
 Amar Djulovic
 2020
 """

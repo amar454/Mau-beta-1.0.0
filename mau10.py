@@ -19,7 +19,7 @@ MAU is a linux imitation made in python
 Amar Djulovic & others
 2020
 """
-
+rootDir = os.path.dirname(os.path.abspath(__file__))
 
 def printE(strs):
     return print(strs, end='')
