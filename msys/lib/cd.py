@@ -17,7 +17,7 @@ def cd(commandList, currpathname, rootDir):
     LS_COMMAND = False
     path = None
     try:
-        os.chdir(commandList[0].replace('~', rootDir))
+        os.chdir(commandList[0].replace('`', rootDir))
     except OSError:
         return print(f'cd: {commandList[0]}: not a valid path')
     except IndexError:

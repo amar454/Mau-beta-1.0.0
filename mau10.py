@@ -1,8 +1,6 @@
 #!/usr/bin/python3.8
-import sys
 
 from termcolor import colored
-
 from app.ceditbeta.main import *
 from msys.lib.cd import *
 from msys.lib.cset import cset
@@ -11,7 +9,6 @@ from msys.lib.ls import *
 from msys.lib.nset import *
 from msys.lib.pathdif import *
 from msys.lib.quit import quitf
-from msys.lib.refresh import refresh
 from msys.lib.cat import cat
 from msys.lib.mkdir import *
 from msys.lib.mkfile import *
@@ -73,7 +70,7 @@ class Finder:
                 (os.path.abspath(__file__)))
             elif tk == 'cat':
                 return cat(self.commandList, os.path.dirname
-                (os.path.abspath(__file__)))
+                (os.path.abspath(__file__)), posixbool=posixorlinux)
             elif tk == 'mkfile':
                 return mkfile(commandList=self.commandList, rootDir=rootDir)
             elif tk == 'mkdir':
