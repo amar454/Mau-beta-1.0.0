@@ -1,15 +1,18 @@
 Commands:
-    echo: ARGS: OPTIONS,    returns ARGS as plain text
-
+    echo: ARGS,             returns ARGS as plain text
 
     quit,                   quits command line
 
+    refresh,                clears the screen
 
-    ls: SET: OPTIONS,       lists the current directories files, and subdirectories. If param OPT is filled it will list OPT's files and subdirectories, will return FileNotFoundError if OPT isn't a real directory under the root directory
+    ls: &[SETTINGS]: &OPT:,  lists the current directories files, and subdirectories. If param OPT is filled it will list OPT's files and subdirectories, will return FileNotFoundError if OPT isn't a real directory under the root directory
 
+    cat: FILE,              will print out a FILE's contents
 
-    math: ARGS: OPTIONS     solves ARGS if ARGS is a math equation, throws MathError if it isn't a math equation
+    nset: OPTION: NAME,     will change the name of option if option is a nml system name
 
-    nset: OPTION: NAME,
+    cset: OPTION: NAME,     will change OPTION consoles colored text, with, will throw error is NAME isn't a valid termcolor color.
+
+    cd: DIR                 will change the working directory to DIR if dir is a directory
 Tip:
     Type (command) --help for more help with each command
