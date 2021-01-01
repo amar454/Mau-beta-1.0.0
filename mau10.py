@@ -35,7 +35,7 @@ class Finder:
     def mFinder(self):
         # checks for valid keywords, a sort of tokenization system.
         # guides the program to each functions
-        # calls command files
+        # calls command files.
         try:
             if self.commandList[0] in self.keywords:
                 pass
