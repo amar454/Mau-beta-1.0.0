@@ -1,4 +1,4 @@
-def cat(commandList, rootDir, posixbool):
+def cat(commandList, rootDir, posixbool, helpfile):
     LINES_COMMANDS = False
     optionList = []
     errorOption = None
@@ -7,8 +7,7 @@ def cat(commandList, rootDir, posixbool):
         return print('cat: no input files')
     if len(commandList) == 2:
         if commandList[1] == '--help':
-            with open(f'{rootDir}/doc/catdoc' if posixbool else f'{rootDir}\\doc\\catdoc')as f:
-                return print(f.read())
+            print(helpfile)
         try:
             with open(commandList[1].replace('*', rootDir)) as f:
                 print(f.read())

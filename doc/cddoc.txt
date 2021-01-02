@@ -1,0 +1,6 @@
+Description:
+    cd stands for 'change directory'.
+    cd will change your current working directory to what you provide it.
+    Your current working directory is where files you make are saved.
+Usage:
+    cd: DIR,

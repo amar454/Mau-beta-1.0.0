@@ -8,14 +8,14 @@ import os
 
 def usrname(userNameFinal, rootDir, posixfinder):
     # nset usrname
-    with open(f'{rootDir}/msys/nml/username' if posixfinder else f'{rootDir}\\msys\\nml\\username', 'w+') as f:
+    with open(f'{rootDir}/msys/nml/username.txt' if posixfinder else f'{rootDir}\\msys\\nml\\username.txt', 'w+') as f:
         f.truncate(0)
         f.write(userNameFinal)
         return None
 
 
 def cmpname(compnamefinal, rootDir, posixfinder):
-    with open(f'{rootDir}/msys/nml/computername' if posixfinder else f'{rootDir}\\msys\\nml\\computername', 'w+') as f:
+    with open(f'{rootDir}/msys/nml/computername.txt' if posixfinder else f'{rootDir}\\msys\\nml\\computername.txt', 'w+') as f:
         f.truncate(0)
         f.write(compnamefinal)
         return None

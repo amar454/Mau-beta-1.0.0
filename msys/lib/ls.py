@@ -199,7 +199,7 @@ def ls(commandList, rootDir, posixfinder):
                     wrongList.append(h)
                     continue
         if HELP_REQUEST:
-            with open(f'{rootDir}/doc/lsdoc' if posixfinder else f'{rootDir}\\doc\\lsdoc') as f:
+            with open(f'{rootDir}/doc/lsdoc.txt' if posixfinder else f'{rootDir}\\doc\\lsdoc.txt') as f:
                 return print(f.read())
 
         # Time last modified: | User of files: | Size of files: | Type: | Hidden: | File names:

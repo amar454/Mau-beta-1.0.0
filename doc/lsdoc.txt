@@ -1,0 +1,17 @@
+Description:
+    This is the ls function in Mau. This lists the current directories and subdirectories.
+Usage:
+    ls: &[SETTINGS]: &DIR
+Settings:
+
+-u,             returns the user who made the file.
+
+-t,             returns the time the file was last modified.
+
+-c,             return whether if the file is a dir, file, or other type.
+
+-h,             returns the hidden files, like documentation and others.
+
+-s,             returns the size of the files or directories.
+
+-a,             enables all settings.

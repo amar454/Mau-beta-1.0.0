@@ -3,7 +3,7 @@ import os
 
 def mkdirMain(commandList, rootDir):
     if len(commandList) == 1:
-        return None
+        return print('mkdir: no input files, type mkdir --help for usage')
     if len(commandList) > 1:
         if commandList[1] == '--help':
             return None
