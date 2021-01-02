@@ -47,7 +47,7 @@ def i():
     pass
 
 
-def cset(commandList, rootDir,posixbool):
+def cset(commandList, rootDir, posixbool):
     if len(commandList) > 1:
         if commandList[1] == 'cc1':
             if len(commandList) == 3:
@@ -58,6 +58,7 @@ def cset(commandList, rootDir,posixbool):
             else:
                 if len(commandList) > 3:
                     return print(
-                        f'{commandList[0]}: {commandList[1]}: {commandList[2]}: {commandList[3]}: too many arguments passed')
+                        f'{commandList[0]}: {commandList[1]}: {commandList[2]}: '
+                        f'{commandList[3]}: too many arguments passed')
     else:
         return None

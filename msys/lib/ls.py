@@ -52,10 +52,9 @@ def s(fs):
     return "%s %s" % (aas, size_name[di])
 
 
-def confop(timeFiles, userFiles, sizeFiles, typeFiles, hiddenFiles, hiddenFilesA, allCommand, customDir, rootDir, posixfinder):
-    emp = ''
-    rf = '/'
-
+def confop(timeFiles, userFiles, sizeFiles, typeFiles,
+           hiddenFiles, hiddenFilesA,
+           customDir, rootDir, posixfinder):
     printE('Time last modified: | ' if timeFiles else '')
     printE('User of files: | ' if userFiles else '')
     printE('Size of files: | ' if sizeFiles else '')
@@ -85,7 +84,7 @@ def confop(timeFiles, userFiles, sizeFiles, typeFiles, hiddenFiles, hiddenFilesA
                 print('')
 
 
-def ls(commandList, docDir, rootDir, posixfinder):
+def ls(commandList, rootDir, posixfinder):
     """
     This is the ls function in Mau. This lists the current directories and subdirectories
     Options are as follows
@@ -112,8 +111,7 @@ def ls(commandList, docDir, rootDir, posixfinder):
     SIZE_FILES = False
     TYPE_FILES = False
     HELP_REQUEST = False
-    ALL_COMMAND = False
-    CUST_DIR = False
+
     hidden = {'.idea', 'help.txt', 'INFO.txt', 'venv', '__pycache__', '__init__', '.git'}
     if len(commandList) == 1:
         # default ls configuration
@@ -150,7 +148,6 @@ def ls(commandList, docDir, rootDir, posixfinder):
                 USER_FILES = True
                 SIZE_FILES = True
                 TYPE_FILES = True
-                ALL_COMMAND = True
                 commandListFinal.append(option)
             elif option == '--help':
                 HELP_REQUEST = True
@@ -169,7 +166,7 @@ def ls(commandList, docDir, rootDir, posixfinder):
 
                 return confop(timeFiles=TIME_FILES, hiddenFiles=HIDDEN_FILES, userFiles=USER_FILES,
                               sizeFiles=SIZE_FILES,
-                              typeFiles=TYPE_FILES, hiddenFilesA=hidden, allCommand=ALL_COMMAND,
+                              typeFiles=TYPE_FILES, hiddenFilesA=hidden,
                               customDir=errorOption, rootDir=rootDir, posixfinder=posixfinder)
             except OSError:
                 return print(': '.join(commandListFinal) + ': not a directory or option for ls, '
@@ -191,6 +188,6 @@ def ls(commandList, docDir, rootDir, posixfinder):
 
         if not done:
             confop(timeFiles=TIME_FILES, hiddenFiles=HIDDEN_FILES, userFiles=USER_FILES, sizeFiles=SIZE_FILES,
-                   typeFiles=TYPE_FILES, hiddenFilesA=hidden, allCommand=ALL_COMMAND,
+                   typeFiles=TYPE_FILES, hiddenFilesA=hidden,
                    customDir=None, rootDir=rootDir, posixfinder=posixfinder)
             return None

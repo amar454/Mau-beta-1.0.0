@@ -1,5 +1,4 @@
 def cat(commandList, rootDir, posixbool):
-    validOptions = {'-l', }
     LINES_COMMANDS = False
     optionList = []
     errorOption = None
