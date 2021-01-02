@@ -1,7 +1,8 @@
 #!/usr/bin/python3.8
-
+from os import system
+import os
 from termcolor import colored
-from app.ceditbeta.main import *
+# from app.ceditbeta.main import *
 from msys.lib.cd import *
 from msys.lib.cset import cset
 from msys.lib.echo import *
