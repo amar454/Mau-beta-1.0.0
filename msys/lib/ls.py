@@ -10,7 +10,7 @@ from pwd import getpwuid
 
 
 def replaceHome(text, rootDir):
-    text.replace('~', rootDir)
+    text.replace('*', rootDir)
 
 
 def printE(strs):
@@ -165,7 +165,7 @@ def ls(commandList, docDir, rootDir, posixfinder):
                 break
         if errorOption is not None and errorOption[0] != '-':
             try:
-                os.listdir(errorOption.replace('&', rootDir))
+                os.listdir(errorOption.replace('*', rootDir))
 
                 return confop(timeFiles=TIME_FILES, hiddenFiles=HIDDEN_FILES, userFiles=USER_FILES,
                               sizeFiles=SIZE_FILES,
