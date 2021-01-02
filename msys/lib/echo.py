@@ -6,4 +6,4 @@ Amar Djulovic
 
 def echo(commandList):
     commandList.remove('echo')
-    return print(*commandList)
+    print(*commandList)

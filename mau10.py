@@ -3,9 +3,10 @@ from os import system
 import os
 from termcolor import colored
 # from app.ceditbeta.main import *
+import msys
 from msys.lib.cd import *
 from msys.lib.cset import cset
-from msys.lib.echo import *
+from msys.lib.echo import echo
 from msys.lib.ls import *
 from msys.lib.nset import *
 from msys.lib.pathdif import *
@@ -14,7 +15,7 @@ from msys.lib.cat import cat
 from msys.lib.mkdir import *
 from msys.lib.mkfile import *
 from msys.lib.posixnt import *
-
+from msys.lib import *
 """
 MAU is a linux imitation made in python
 Amar Djulovic & others
@@ -45,7 +46,7 @@ class Finder:
         if self.commandList[0] in self.keywords:
             tk = self.commandList[0]
             if tk == 'echo':
-                return echo(self.commandList)
+                msys.lib.echo.echo(self.commandList)
             elif tk == 'cset':
                 return cset(commandList=self.commandList, rootDir=os.path.dirname(os.path.abspath(__file__)), posixbool=posixorlinux)
             elif tk == 'quit':
