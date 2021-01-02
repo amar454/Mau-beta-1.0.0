@@ -1,4 +1,5 @@
 #!/usr/bin/python3.8
+import sys
 from os import system
 from termcolor import colored
 # from app.ceditbeta.main import *
@@ -70,12 +71,11 @@ class Finder:
                     fl.close()
                 return None
             elif tk == 'ls':
-                return ls(self.commandList, docDir=r'doc',
-                          rootDir=os.path.dirname
+                return ls(self.commandList, rootDir=os.path.dirname
                           (os.path.abspath(__file__)), posixfinder=posixorlinux)
             elif tk == 'cd':
                 return cd(commandList=self.commandList,
-                          currpathname=currPath, rootDir=os.path.dirname
+                          rootDir=os.path.dirname
                           (os.path.abspath(__file__)))
             elif tk == 'cat':
                 return cat(self.commandList, os.path.dirname

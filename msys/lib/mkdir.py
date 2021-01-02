@@ -1,4 +1,4 @@
-import os, sys
+import os
 
 
 def mkdirMain(commandList, rootDir):
