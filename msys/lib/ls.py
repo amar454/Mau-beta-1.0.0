@@ -9,6 +9,17 @@ from datetime import datetime
 from pwd import getpwuid
 
 
+def getSize(start_path='.'):
+    total_size = 0
+    for dirPath, dirNames, fileNames in os.walk(start_path):
+        for f in fileNames:
+            fp = os.path.join(dirPath, f)
+            if not os.path.islink(fp):
+                total_size += os.path.getsize(fp)
+
+    return total_size
+
+
 def replaceHome(text, rootDir):
     text.replace('*', rootDir)
 
@@ -40,7 +51,14 @@ def c(cd):
 def s(fs):
     # uses algorithm to find the size of a file using the math library and others
     try:
-        g = os.path.getsize(fs)
+        if os.path.isfile(fs):
+            g = os.path.getsize(fs)
+        elif os.path.isdir(fs):
+            g = getSize(fs)
+        else:
+            g = 0
+
+
     except OSError:
         return None
     if g == 0:
@@ -73,7 +91,7 @@ def confop(timeFiles, userFiles, sizeFiles, typeFiles,
             printE(x)
             print('')
         if not hiddenFiles:
-            if x in hiddenFilesA:
+            if x in hiddenFilesA or x.startswith('.'):
                 continue
             else:
                 printE(t(f'{mainSub}{x}').ljust(20, " ") + '| ' if timeFiles else '')
