@@ -1,6 +1,5 @@
 #!/usr/bin/python3.8
 from os import system
-import os
 from termcolor import colored
 # from app.ceditbeta.main import *
 import msys
@@ -15,7 +14,7 @@ from msys.lib.cat import cat
 from msys.lib.mkdir import *
 from msys.lib.mkfile import *
 from msys.lib.posixnt import *
-from msys.lib import *
+
 """
 MAU is a linux imitation made in python
 Amar Djulovic & others
@@ -23,6 +22,8 @@ Amar Djulovic & others
 """
 rootDir = os.path.dirname(os.path.abspath(__file__))
 posixorlinux = posixfinder()
+
+
 def printE(strs):
     return print(strs, end='')
 
@@ -31,7 +32,8 @@ class Finder:
     def __init__(self, command):
         self.command = command
         self.commandList = command.split()
-        self.keywords = {'echo', 'ls', 'quit', 'exit', 'math', 'help', 'cd', 'nset', 'refresh', 'cset', 'open', 'cedit',
+        self.keywords = {'echo', 'ls', 'quit', 'exit', 'math', 'help', 'cd',
+                         'nset', 'refresh', 'cset', 'open', 'cedit',
                          'cat', 'mkdir', 'mkfile'}
 
     def mFinder(self):
@@ -46,9 +48,12 @@ class Finder:
         if self.commandList[0] in self.keywords:
             tk = self.commandList[0]
             if tk == 'echo':
-                msys.lib.echo.echo(self.commandList)
+                return msys.lib.echo.echo(self.commandList)
             elif tk == 'cset':
-                return cset(commandList=self.commandList, rootDir=os.path.dirname(os.path.abspath(__file__)), posixbool=posixorlinux)
+                return cset(commandList=self.commandList,
+                            rootDir=os.path.dirname
+                            (os.path.abspath(__file__)),
+                            posixbool=posixorlinux)
             elif tk == 'quit':
                 return quitf()
             elif tk == 'refresh':
@@ -60,16 +65,18 @@ class Finder:
             elif tk == 'nset':
                 return nsmain(self.commandList, posixorlinux)
             elif tk == 'help':
-                with open(r'doc/help.txt') as f:
-                    print(f.read())
-                    f.close()
+                with open(r'doc/help.txt') as fl:
+                    print(fl.read())
+                    fl.close()
                 return None
             elif tk == 'ls':
-                return ls(self.commandList, docDir=r'doc', rootDir=os.path.dirname
-                (os.path.abspath(__file__)),posixfinder=posixorlinux)
+                return ls(self.commandList, docDir=r'doc',
+                          rootDir=os.path.dirname
+                          (os.path.abspath(__file__)), posixfinder=posixorlinux)
             elif tk == 'cd':
-                return cd(commandList=self.commandList, currpathname=currPath, rootDir=os.path.dirname
-                (os.path.abspath(__file__)))
+                return cd(commandList=self.commandList,
+                          currpathname=currPath, rootDir=os.path.dirname
+                          (os.path.abspath(__file__)))
             elif tk == 'cat':
                 return cat(self.commandList, os.path.dirname
                 (os.path.abspath(__file__)), posixbool=posixorlinux)
@@ -79,27 +86,28 @@ class Finder:
                 return mkdirMain(commandList=self.commandList, rootDir=rootDir)
             elif tk == 'cedit':
                 pass
-
-
         else:
             return print(f'{self.commandList[0]}: command not found')
 
 
 if __name__ == '__main__':
     system('clear')
-    with open(r'msys/nml/username' if posixorlinux else r'msys\nml\username') as f:
+    with open(r'msys/nml/username' if
+    posixorlinux else r'msys\nml\username') as f:
         userName = f.read()
         f.close()
-    with open(r'msys/nml/computername' if posixorlinux else r'msys\nml\computername') as f:
+    with open(r'msys/nml/computername' if
+    posixorlinux else r'msys\nml\computername') as f:
         computerName = f.read()
         f.close()
-    with open(r'msys/nml/consolecolor.txt' if posixorlinux else r'msys\nml\consolecolor.txt') as f:
+    with open(r'msys/nml/consolecolor.txt' if
+    posixorlinux else r'msys\nml\consolecolor.txt') as f:
         c_colorsList = f.read().split('\n')
-
     while True:
         currPath = os.getcwd()
         userInput = input(
             colored(f'{userName}@{computerName}', c_colorsList[0],
-                    attrs=['bold']) + ':' + colored(replaceHome(text=currPath, rootDir=os.path.dirname
+            attrs=['bold']) + ':' + colored
+            (replaceHome(text=currPath, rootDir=os.path.dirname
             (os.path.abspath(__file__))), c_colorsList[1]) + '% ')
         Finder(userInput).mFinder()
